@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Happy Birthday 🎂</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet" />
+<style>
+:root{color-scheme:light;--ink:#4a3552;--pink:#f4a6b7;--teal:#7fd1c7;--sun:#ffd36e;--bg1:#fff3d9;--bg2:#ffe1ea}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font-family:"Pixelify Sans",monospace,sans-serif;color:var(--ink);overflow:hidden;
+ background:radial-gradient(circle at 20% 15%,#fff 0,transparent 40%),linear-gradient(160deg,var(--bg1),var(--bg2));
+ padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+.bunting{position:fixed;top:0;left:0;right:0;height:56px;display:flex;justify-content:space-around;pointer-events:none;z-index:1}
+.bunting i{width:0;height:0;border-left:22px solid transparent;border-right:22px solid transparent;border-top:42px solid var(--c);animation:sway 3s ease-in-out infinite;transform-origin:top}
+.bunting i:nth-child(even){animation-delay:-1.4s}
+@keyframes sway{50%{transform:rotate(6deg)}}
+.balloon{position:fixed;bottom:-120px;width:46px;height:58px;border-radius:50% 50% 48% 48%;background:var(--c);opacity:.85;animation:rise var(--t) linear infinite;animation-delay:var(--d);left:var(--x);pointer-events:none}
+.balloon::after{content:"";position:absolute;left:50%;top:100%;width:2px;height:40px;background:#0002}
+@keyframes rise{to{transform:translateY(-130vh) translateX(18px)}}
+.stage{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:70px 16px 16px;z-index:2}
+.stage.on{display:flex;animation:pop .6s ease both}
+@keyframes pop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
+h1{font-size:clamp(26px,6vw,44px);margin:0 0 6px}
+.hint{font-size:clamp(16px,3.6vw,22px);margin:10px 0 0;opacity:.85}
+svg{image-rendering:pixelated;shape-rendering:crispEdges;cursor:pointer}
+#cake{width:min(70vw,340px)}
+.flame{animation:flick .35s steps(2) infinite}
+@keyframes flick{50%{transform:translateY(.4px) scaleX(.9)}}
+#env{width:min(70vw,260px);animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) scale(1.04)}}
+#letter{width:min(92vw,560px);max-height:calc(100vh - 100px);overflow:auto;background:#fffdf6;border:4px solid var(--ink);border-radius:6px;box-shadow:8px 8px 0 var(--pink);padding:26px 26px 20px;text-align:left;
+ background-image:repeating-linear-gradient(transparent 0 31px,#e7dccb 31px 32px);background-position:0 20px}
+#letter h2{font-family:"Pixelify Sans";font-size:clamp(22px,5vw,30px);margin:0 0 14px;color:#d1496b}
+#letter p{font-family:"Caveat",cursive;font-weight:500;font-size:clamp(21px,4.6vw,27px);line-height:32px;margin:0 0 12px;opacity:0;transform:translateY(8px);transition:opacity .9s ease,transform .9s ease}
+#letter p.show{opacity:1;transform:none}
+#letter .sig{text-align:right;font-weight:700;margin-bottom:0}
+#cat{text-align:center;margin:6px auto 0;opacity:0;transition:opacity 1s}#cat svg{cursor:default}#cat .heart{display:block;width:34px;margin:0 auto 6px;animation:beat 1s ease-in-out infinite;filter:drop-shadow(2px 0 0 #4a3552) drop-shadow(-2px 0 0 #4a3552) drop-shadow(0 2px 0 #4a3552) drop-shadow(0 -2px 0 #4a3552)}#cat .monchi{display:block;width:110px;margin:0 auto;animation:dance .7s ease-in-out infinite;filter:drop-shadow(3px 0 0 #4a3552) drop-shadow(-3px 0 0 #4a3552) drop-shadow(0 3px 0 #4a3552) drop-shadow(0 -3px 0 #4a3552)}#cat span{display:block;font-size:22px;margin-top:8px;color:#d1496b}@keyframes dance{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-8px) rotate(4deg)}}@keyframes beat{50%{transform:translateY(-4px) scale(1.15)}}
+#cat.show{opacity:1}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:5}
+</style>
+</head>
+<body>
+<div class="bunting" id="bunting"></div>
+<canvas id="confetti"></canvas>
+
+<!-- 1. Cake -->
+<section class="stage on" id="s1">
+  <h1 id="t1">Make a wish…</h1>
+  <svg id="cake" viewBox="0 0 32 30" role="button" aria-label="Blow out the candle">
+    <rect x="3" y="27" width="26" height="2" fill="#d9c7b8"/>
+    <rect x="5" y="18" width="22" height="9" fill="#f4a6b7"/>
+    <rect x="5" y="18" width="22" height="2" fill="#fff"/>
+    <rect x="7" y="20" width="2" height="2" fill="#fff"/><rect x="14" y="20" width="2" height="3" fill="#fff"/><rect x="22" y="20" width="2" height="2" fill="#fff"/>
+    <rect x="9" y="11" width="14" height="7" fill="#ffd36e"/>
+    <rect x="9" y="11" width="14" height="2" fill="#fff"/>
+    <rect x="11" y="14" width="1" height="1" fill="#d1496b"/><rect x="16" y="15" width="1" height="1" fill="#7fd1c7"/><rect x="20" y="14" width="1" height="1" fill="#d1496b"/>
+    <rect x="8" y="22" width="1" height="1" fill="#fff"/><rect x="18" y="24" width="1" height="1" fill="#ffd36e"/><rect x="24" y="23" width="1" height="1" fill="#7fd1c7"/>
+    <rect x="15" y="5" width="2" height="6" fill="#7fd1c7"/>
+    <g class="flame" id="flame"><rect x="15" y="1" width="2" height="4" fill="#ff8a3d"/><rect x="15" y="3" width="2" height="2" fill="#ffd36e"/></g>
+  </svg>
+  <p class="hint" id="h1">Tap the candle to blow it out</p>
+</section>
+
+<!-- 2. Envelope -->
+<section class="stage" id="s2">
+  <h1>Happy Birthday, Elai ❤️<span id="nm1"></span>!</h1>
+  <svg id="env" viewBox="0 0 20 14" role="button" aria-label="Open the letter">
+    <rect x="1" y="2" width="18" height="11" fill="#f6dfbd"/>
+    <rect x="1" y="2" width="18" height="1" fill="#c9776b"/><rect x="1" y="12" width="18" height="1" fill="#c9776b"/>
+    <rect x="1" y="2" width="1" height="11" fill="#c9776b"/><rect x="18" y="2" width="1" height="11" fill="#c9776b"/>
+    <g fill="#d99a8e"><rect x="2" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="6" y="7" width="1" height="1"/><rect x="7" y="8" width="1" height="1"/><rect x="17" y="3" width="1" height="1"/><rect x="16" y="4" width="1" height="1"/><rect x="15" y="5" width="1" height="1"/><rect x="14" y="6" width="1" height="1"/><rect x="13" y="7" width="1" height="1"/><rect x="12" y="8" width="1" height="1"/></g>
+    <g fill="#d1496b"><rect x="8" y="7" width="1" height="1"/><rect x="11" y="7" width="1" height="1"/><rect x="8" y="8" width="4" height="1"/><rect x="9" y="9" width="2" height="1"/></g>
+    <rect x="9" y="7" width="2" height="1" fill="#ffd36e"/>
+  </svg>
+  <p class="hint">I wrote you something. Tap to open ✉️</p>
+</section>
+
+<!-- 3. Letter -->
+<section class="stage" id="s3">
+  <div id="letter">
+    <h2 id="lt"></h2>
+    <div id="body"></div>
+    <div id="cat"><svg class="heart" viewBox="0 0 7 6" aria-hidden="true"><rect x="1" y="0" width="2" height="1" fill="#d1496b"/><rect x="4" y="0" width="2" height="1" fill="#d1496b"/><rect x="0" y="1" width="7" height="2" fill="#d1496b"/><rect x="1" y="3" width="5" height="1" fill="#d1496b"/><rect x="2" y="4" width="3" height="1" fill="#d1496b"/><rect x="3" y="5" width="1" height="1" fill="#d1496b"/><rect x="1" y="1" width="1" height="1" fill="#ff9fb4"/></svg><svg class="monchi" viewBox="0 0 24 22" aria-hidden="true"><rect x="3" y="0" width="1" height="1" fill="#f0a24a"/><rect x="3" y="1" width="2" height="1" fill="#f0a24a"/><rect x="3" y="2" width="3" height="1" fill="#f0a24a"/><rect x="20" y="0" width="1" height="1" fill="#f0a24a"/><rect x="19" y="1" width="2" height="1" fill="#f0a24a"/><rect x="18" y="2" width="3" height="1" fill="#f0a24a"/><rect x="4" y="2" width="1" height="1" fill="#f2a0a8"/><rect x="19" y="2" width="1" height="1" fill="#f2a0a8"/><rect x="21" y="11" width="2" height="8" fill="#f0a24a"/><rect x="21" y="13" width="2" height="1" fill="#d9822b"/><rect x="21" y="16" width="2" height="1" fill="#d9822b"/><rect x="6" y="11" width="12" height="1" fill="#f0a24a"/><rect x="4" y="12" width="16" height="3" fill="#f0a24a"/><rect x="3" y="15" width="18" height="5" fill="#f0a24a"/><rect x="4" y="20" width="16" height="1" fill="#f0a24a"/><rect x="6" y="21" width="12" height="1" fill="#f0a24a"/><rect x="8" y="11" width="8" height="1" fill="#fffaf0"/><rect x="7" y="12" width="10" height="3" fill="#fffaf0"/><rect x="6" y="15" width="12" height="5" fill="#fffaf0"/><rect x="7" y="20" width="10" height="1" fill="#fffaf0"/><rect x="8" y="21" width="8" height="1" fill="#fffaf0"/><rect x="4" y="13" width="2" height="1" fill="#d9822b"/><rect x="4" y="16" width="2" height="1" fill="#d9822b"/><rect x="18" y="14" width="2" height="1" fill="#d9822b"/><rect x="18" y="17" width="2" height="1" fill="#d9822b"/><rect x="5" y="3" width="14" height="1" fill="#f0a24a"/><rect x="3" y="4" width="18" height="6" fill="#f0a24a"/><rect x="4" y="10" width="16" height="1" fill="#f0a24a"/><rect x="9" y="4" width="1" height="2" fill="#d9822b"/><rect x="11" y="4" width="2" height="3" fill="#d9822b"/><rect x="14" y="4" width="1" height="2" fill="#d9822b"/><rect x="6" y="6" width="3" height="2" fill="#f2b640"/><rect x="15" y="6" width="3" height="2" fill="#f2b640"/><rect x="7" y="6" width="1" height="2" fill="#2b2030"/><rect x="16" y="6" width="1" height="2" fill="#2b2030"/><rect x="9" y="9" width="6" height="2" fill="#fffaf0"/><rect x="11" y="8" width="2" height="1" fill="#f2a0a8"/><rect x="11" y="10" width="2" height="1" fill="#f2a0a8"/></svg><span>Monchi</span></div>
+  </div>
+</section>
+
+<script>
+/* ✏️ PERSONALIZE HERE */
+const TO   = "";   // her name, e.g. "Anna"
+const FROM = "";   // your name
+const MESSAGE = [
+  "I just want you to know how grateful I am na nakilala kita.",
+  "Thank you for letting me be part of your life, I hope you continue to grow and maging successful sa buhay.",
+  "I hope this year would be good to you, more fun things to enjoy, more travels and adventures, more opportunities to grow and have courage to do what your heart desires. ",
+  "I'll support you in everything that you do, I'll always be with you and believe in you. ",
+  "Enjoy your day! Take care of yourself. I love you! Happy birthday!! 🎂"
+];
+
+const $ = id => document.getElementById(id);
+$("nm1").textContent = TO ? ", " + TO : "";
+$("lt").textContent = TO ? "Dear" + TO + "elai" : "Happy Birthday, Elai";
+
+// bunting + balloons
+const cols = ["#f4a6b7","#7fd1c7","#ffd36e","#b9a3e3","#ff8a3d"];
+for (let i = 0; i < 12; i++) { const e = document.createElement("i"); e.style.setProperty("--c", cols[i % 5]); $("bunting").appendChild(e); }
+for (let i = 0; i < 7; i++) { const b = document.createElement("div"); b.className = "balloon";
+  b.style.cssText = `--c:${cols[i%5]};--x:${8+i*13}%;--t:${11+(i*3)%7}s;--d:${-i*2.3}s`; document.body.appendChild(b); }
+
+// confetti
+const cv = $("confetti"), cx = cv.getContext("2d"); let parts = [], raf = 0;
+function fit(){ cv.width = innerWidth; cv.height = innerHeight; } fit(); addEventListener("resize", fit);
+function burst(x, y, n = 120) {
+  for (let i = 0; i < n; i++) { const a = Math.random() * Math.PI * 2, s = 4 + Math.random() * 9;
+    parts.push({x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s - 6, w: 6 + Math.random() * 6, c: cols[i % 5], life: 140 + Math.random() * 60}); }
+  if (!raf) raf = requestAnimationFrame(tick);
+}
+function tick() {
+  cx.clearRect(0, 0, cv.width, cv.height);
+  parts = parts.filter(p => p.life-- > 0);
+  parts.forEach(p => { p.vy += .25; p.vx *= .99; p.x += p.vx; p.y += p.vy; cx.fillStyle = p.c; cx.fillRect(p.x, p.y, p.w, p.w); });
+  raf = parts.length ? requestAnimationFrame(tick) : 0;
+  if (!raf) cx.clearRect(0, 0, cv.width, cv.height);
+}
+function go(id) { document.querySelectorAll(".stage").forEach(s => s.classList.remove("on")); $(id).classList.add("on"); }
+
+// 1: blow out candle
+let blown = false;
+$("cake").addEventListener("click", () => {
+  if (blown) return; blown = true;
+  $("flame").style.display = "none";
+  $("t1").textContent = "Your wish is on its way ✨";
+  $("h1").textContent = "";
+  burst(innerWidth / 2, innerHeight / 2.2, 160);
+  setTimeout(() => { go("s2"); burst(innerWidth / 2, innerHeight / 3, 90); }, 1800);
+});
+
+// 2: open envelope, then write message line by line
+$("env").addEventListener("click", () => {
+  go("s3");
+  const body = $("body"); body.innerHTML = "";
+  const items = MESSAGE.slice(); items.push("With appreciation" + (FROM ? ",<br><br>" + FROM : "-Erickson"));
+  items.forEach((t, i) => { const p = document.createElement("p"); p.innerHTML = t; if (i === items.length - 1) p.className = "sig"; body.appendChild(p);
+    setTimeout(() => p.classList.add("show"), 700 + i * 1900); });
+  setTimeout(() => { $("cat").classList.add("show"); burst(innerWidth / 2, innerHeight / 2, 100); }, 700 + items.length * 1900);
+});
+</script>
+</body>
+</html>
