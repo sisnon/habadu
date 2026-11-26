@@ -142,7 +142,7 @@ $("cake").addEventListener("click", () => {
 $("env").addEventListener("click", () => {
   go("s3");
   const body = $("body"); body.innerHTML = "";
-  const items = MESSAGE.slice(); items.push("Love," + (FROM ? ",<br><br>" + FROM : "Erickson"));
+  const items = MESSAGE.slice(); items.push("Love,<br>" + (FROM ? "" + FROM : "Erickson"));
   items.forEach((t, i) => { const p = document.createElement("p"); p.innerHTML = t; if (i === items.length - 1) p.className = "sig"; body.appendChild(p);
     setTimeout(() => p.classList.add("show"), 700 + i * 1900); });
   setTimeout(() => { $("cat").classList.add("show"); burst(innerWidth / 2, innerHeight / 2, 100); }, 700 + items.length * 1900);
